@@ -10,6 +10,7 @@ class Account extends Model
     use HasFactory;
     public $incrementing = false;
     public $timestamps = false;
+    protected  $primaryKey = 'conta_id';
     protected $fillable = [
         'conta_id',
         'saldo',

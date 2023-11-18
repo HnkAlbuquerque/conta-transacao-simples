@@ -24,7 +24,7 @@ class TransactionControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertJson(['saldo' => 448.50],
          200);
-        $this->assertDatabaseHas('account',[
+        $this->assertDatabaseHas('accounts',[
             'conta_id' => '3333',
             'saldo' => 448.50
         ]);
@@ -40,9 +40,9 @@ class TransactionControllerTest extends TestCase
         $this->createAccount(['conta_id' => '4444']);
         $response = $this->post(route('transacao'), $payload, );
         $response->assertStatus(200);
-        $response->assertJson(['saldo' => 395.00],
+        $response->assertJson(['saldo' => 395],
             200);
-        $this->assertDatabaseHas('account',[
+        $this->assertDatabaseHas('accounts',[
             'conta_id' => '4444',
             'saldo' => 395.00
         ]);
@@ -58,9 +58,9 @@ class TransactionControllerTest extends TestCase
         $this->createAccount(['conta_id' => '5555']);
         $response = $this->post(route('transacao'), $payload, );
         $response->assertStatus(200);
-        $response->assertJson(['saldo' => 425.00],
+        $response->assertJson(['saldo' => 425],
             200);
-        $this->assertDatabaseHas('account',[
+        $this->assertDatabaseHas('accounts',[
             'conta_id' => 5555,
             'saldo' => 425.00
         ]);
@@ -76,10 +76,10 @@ class TransactionControllerTest extends TestCase
         ];
         $response = $this->post(route('transacao'), $payload, );
         $response->assertStatus(200);
-        $response->assertJson(['saldo' => 491.00],
+        $response->assertJson(['saldo' => 491],
             200);
-        $this->assertDatabaseHas('account',[
-            'conta_id' => 555,
+        $this->assertDatabaseHas('accounts',[
+            'conta_id' => 9999,
             'saldo' => 491.00
         ]);
     }
@@ -112,7 +112,7 @@ class TransactionControllerTest extends TestCase
         $response->assertStatus(400);
         $response->assertJson([
             'errors' => [
-                "message" => "Fundos insuficientes, realize um depósito antes de fazer esta operação",
+                "message" => "Fundos insuficientes, realize um deposito antes de fazer esta operacao",
             ],
         ], 400);
     }
