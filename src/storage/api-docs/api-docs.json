@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Objetctive Php Test",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/conta/{conta_id}": {
+            "get": {
+                "summary": "Get logged-in user details",
+                "operationId": "10f1cce325043d7c0cdb6f83a8a9fb49",
+                "parameters": [
+                    {
+                        "name": "conta_id",
+                        "in": "query",
+                        "description": "Id da conta",
+                        "required": true,
+                        "schema": {
+                            "type": "numeric"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna conta descrita"
+                    },
+                    "404": {
+                        "description": "Conta inexistente, not found"
+                    }
+                }
+            }
+        },
+        "/api/transacao": {
+            "post": {
+                "summary": "Efetua uma nova transação",
+                "operationId": "21b9084566c42f9081506474ad16a779",
+                "parameters": [
+                    {
+                        "name": "forma_pagamento",
+                        "in": "query",
+                        "description": "Forma de pagamento, pix, crédito, débito",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "conta_id",
+                        "in": "query",
+                        "description": "Id da conta",
+                        "required": true,
+                        "schema": {
+                            "type": "numeric"
+                        }
+                    },
+                    {
+                        "name": "valor",
+                        "in": "query",
+                        "description": "Valor da transação",
+                        "required": true,
+                        "schema": {
+                            "type": "numeric"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transação efetuada com sucesso"
+                    },
+                    "422": {
+                        "description": "Erros de Validação"
+                    }
+                }
+            }
+        }
+    }
+}

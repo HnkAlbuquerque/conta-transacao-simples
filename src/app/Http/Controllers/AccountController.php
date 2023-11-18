@@ -18,6 +18,21 @@ class AccountController extends Controller
         $this->accountRepository = $accountRepository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/conta/{conta_id}",
+     *     summary="Get logged-in user details",
+     *     @OA\Parameter(
+     *          name="conta_id",
+     *          in="query",
+     *          description="Id da conta",
+     *          required=true,
+     *          @OA\Schema(type="numeric")
+     *      ),
+     *     @OA\Response(response="200", description="Retorna conta descrita"),
+     *     @OA\Response(response="404", description="Conta inexistente, not found")
+     * )
+     */
     public function account(AccountRequest $request)
     {
         $arrayMessages = $this->accountRepository->returnAccountResponses($request->conta_id);

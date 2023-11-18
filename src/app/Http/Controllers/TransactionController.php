@@ -27,6 +27,35 @@ class TransactionController extends Controller
         $this->transactionRepository = $transactionRepository;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/transacao",
+     *     summary="Efetua uma nova transação",
+     *     @OA\Parameter(
+     *         name="forma_pagamento",
+     *         in="query",
+     *         description="Forma de pagamento, pix, crédito, débito",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         name="conta_id",
+     *         in="query",
+     *         description="Id da conta",
+     *         required=true,
+     *         @OA\Schema(type="numeric")
+     *     ),
+     *     @OA\Parameter(
+     *         name="valor",
+     *         in="query",
+     *         description="Valor da transação",
+     *         required=true,
+     *         @OA\Schema(type="numeric")
+     *     ),
+     *     @OA\Response(response="200", description="Transação efetuada com sucesso"),
+     *     @OA\Response(response="422", description="Erros de Validação")
+     * )
+     */
     public function transaction(TransactionRequest $request) {
         $payload = [
             "forma_pagamento" => $request->forma_pagamento,
