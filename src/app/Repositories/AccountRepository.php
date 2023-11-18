@@ -3,20 +3,32 @@
 namespace App\Repositories;
 
 use App\Models\Account;
+use Illuminate\Support\Facades\DB;
 
 class AccountRepository
 {
-    public function createAccount($params): Model
+    public function createAccount($account_id)
     {
-        return Account::factory()->create($params);
+        try {
+            return DB::transaction(function () use($account_id) {
+                return Account::firstOrCreate(
+                    ['conta_id' => $account_id],
+                    ['saldo' => 500],
+                );
+            });
+        } catch (\Exception $exception) {
+            return response()->json(['errors' => ['message' => $exception->getMessage()]], $exception->getCode());
+        }
     }
 
     public function find($account_id)
     {
         try {
-            return Account::where('conta_id', $account_id)->first();
+            return DB::transaction(function () use($account_id) {
+                return Account::where('conta_id', $account_id)->first();
+            });
         } catch (\Exception $exception) {
-            return $exception;
+            return response()->json(['errors' => ['message' => $exception->getMessage()]], $exception->getCode());
         }
     }
 
@@ -31,5 +43,4 @@ class AccountRepository
         }
         return $response;
     }
-
 }
