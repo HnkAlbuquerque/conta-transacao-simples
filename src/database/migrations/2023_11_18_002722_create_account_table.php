@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    public $timestamps = false;
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('account', function (Blueprint $table) {
-            $table->text('conta_id')->primary();
+        Schema::create('accounts', function (Blueprint $table) {
+            $table->string('conta_id', 4)->primary();
             $table->decimal('saldo');
         });
     }
