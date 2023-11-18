@@ -89,13 +89,13 @@ class TransactionControllerTest extends TestCase
         $payload = [
             'forma_pagamento' => 'F',
             'conta_id' => '1001',
-            'valor' => -500
+            'valor' => 400
         ];
         $response = $this->post(route('transacao'), $payload, );
         $response->assertStatus(422);
         $response->assertJson([
             'errors' => [
-                "forma_pagemnto" => ["Forma de pagamento deve seguir a seguinte regra: P = Pix | D = Débito | C = Crédito"],
+                "forma_pagamento" => ["Forma de pagamento deve seguir a seguinte regra: P = Pix | D = Debito | C = Credito"],
             ],
         ], 422);
     }
@@ -128,7 +128,7 @@ class TransactionControllerTest extends TestCase
         $response->assertStatus(422);
         $response->assertJson([
             'errors' => [
-                "valor" => ["Não é possível realizar uma transferencia com valor negativo"],
+                "valor" => ["Não é possível realizar uma transferencia com valor menor que 1"],
             ],
         ], 422);
     }
