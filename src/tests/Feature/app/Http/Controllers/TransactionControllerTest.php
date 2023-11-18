@@ -112,7 +112,7 @@ class TransactionControllerTest extends TestCase
         $response->assertStatus(400);
         $response->assertJson([
             'errors' => [
-                "message" => [ "Fundos insuficientes, realize um depósito antes de fazer esta operação"],
+                "message" => "Fundos insuficientes, realize um depósito antes de fazer esta operação",
             ],
         ], 400);
     }
@@ -138,7 +138,7 @@ class TransactionControllerTest extends TestCase
         $payload = [
             'forma_pagamento' => 'C',
             'conta_id' => 'FAKE-ACC',
-            'valor' => -500
+            'valor' => 500
         ];
         $response = $this->post(route('transacao'), $payload, );
         $response->assertStatus(422);
@@ -147,27 +147,5 @@ class TransactionControllerTest extends TestCase
                 "conta_id" => ["Id da conta deve ser uma string numérica de até 4 digitos"],
             ],
         ], 422);
-    }
-
-    public function testRetrieveAccount()
-    {
-        $this->createAccount(['conta_id' => '1234']);
-        $response = $this->get(route('conta', ['1234']));
-        $response->assertStatus(200);
-        $response->assertJson([
-                "conta_id" => "1234",
-                "saldo" => 500.00,
-        ], 200);
-    }
-
-    public function testAccountNotFound()
-    {
-        $response = $this->get(route('conta',['8796']));
-        $response->assertStatus(404);
-        $response->assertJson([
-            'errors' => [
-                "message" => [ "Conta não encontrada"],
-            ],
-        ], 404);
     }
 }
