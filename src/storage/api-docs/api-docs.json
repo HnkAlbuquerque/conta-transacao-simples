@@ -7,7 +7,7 @@
     "paths": {
         "/api/conta/{conta_id}": {
             "get": {
-                "summary": "Get logged-in user details",
+                "summary": "Retorna informações da conta",
                 "operationId": "10f1cce325043d7c0cdb6f83a8a9fb49",
                 "parameters": [
                     {

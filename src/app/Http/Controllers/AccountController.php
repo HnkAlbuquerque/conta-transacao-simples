@@ -21,7 +21,7 @@ class AccountController extends Controller
     /**
      * @OA\Get(
      *     path="/api/conta/{conta_id}",
-     *     summary="Get logged-in user details",
+     *     summary="Retorna informações da conta",
      *     @OA\Parameter(
      *          name="conta_id",
      *          in="query",
