@@ -1,4 +1,4 @@
-# Objective Api
+# Api simples de contas e transações
 
 ## Objetivo
 
